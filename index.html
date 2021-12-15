@@ -115,7 +115,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="myalgo.min.js"></script>
     <script>
-        $("#myForm").submit(function(){
+        $("#myForm").submit(function(e){
+            e.preventDefault();
             $("#myForm").attr("hidden", true)
             $("#success").attr("hidden", false)
         })
