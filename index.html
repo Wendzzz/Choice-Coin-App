@@ -1,125 +1,645 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choice Coin Voting</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Choice Coin — Decentralized decision infrastructure on Algorand</title>
+<meta name="description" content="Choice Coin turns collective intent into settled, verifiable outcomes. Propose, vote and finalize on Algorand in seconds, for fractions of a cent.">
+<meta name="theme-color" content="#05070d">
+<meta property="og:title" content="Choice Coin — Decentralized decision infrastructure">
+<meta property="og:description" content="Propose, vote and settle governance outcomes on-chain. Verifiable by anyone, custodied by no one.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237c5cff'/%3E%3Cpath d='M9 17l4.5 4.5L23 12' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<noscript>
+  <style>
+    [data-reveal], .stage, .line-inner, .split-char, .label .bracket { opacity: 1 !important; transform: none !important; }
+    .marquee-track { animation: none !important; }
+    .faq-a { height: auto !important; opacity: 1 !important; transform: none !important; }
+    .cursor-glow, .cursor-dot { display: none !important; }
+  </style>
+</noscript>
 </head>
-<body class="bg-secondary">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-        body{
-            font-family: Poppins;
-        }
+<div class="cursor-glow" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
 
-        .card{
-            max-width: 500px;
-            padding: 20px 50px;
-            border-radius: 25px;
-        }
-        .algo-btn{
-            border-radius: 45px;
-        }
-    </style>
-    <div class="container py-5">
-  
+<header class="nav">
+  <div class="shell nav-inner">
+    <a class="brand" href="#home" aria-label="Choice Coin home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      Choice Coin
+    </a>
 
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <h4 class="text-light">Choice Coin Voting</h4>
-            </div>
-            <div class="col-lg-6 col-sm-12">
-                <button id="connect-btn" type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#modal">
-                    Connect Wallet
-                </button>
-                <p id="address" class="text-light"> </p>
-              
-            </div>
-        </div>
-        
-        <!-- Modal -->
-        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="modalLabel">Connect Wallet</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body py-5">
-                    <center>
-                        <a class="btn btn-primary btn-lg algo-btn px-4" onclick="connectToMyAlgo()">
-                            <img src="https://wallet.myalgo.com/favicon/favicon.ico" width="30" class="mx-2">
-                            My Algo Wallet
-                        </a>
-                    </center>
-                </div>
-                
-                </div>
-            </div>
-        </div>
+    <nav class="nav-links" aria-label="Primary">
+      <a class="nav-link" href="#protocol">Protocol</a>
+      <a class="nav-link" href="#how">How it works</a>
+      <a class="nav-link" href="#voices">Voices</a>
+      <a class="nav-link" href="#faq">FAQ</a>
+      <a class="nav-link" href="#pricing">Pricing</a>
+    </nav>
 
+    <div class="nav-actions">
+      <a class="nav-signin" href="app.html">Sign in</a>
+      <a class="btn btn-primary nav-cta" href="app.html">
+        Launch app
+        <span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navPanel" aria-label="Open menu">
+        <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
 
-        <div class="py-5">
-            <div class="card py-5 mx-auto">
-                <form action="px-5" id="myForm">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="SSN" required>
-                                <label for="floatingInput">Social Security Number</label>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingPassword" placeholder="Driver's License Number" required>
-                                <label for="floatingPassword">Driver's License Number</label>
-                              </div>
-        
-                        </div>
-                        <div class="col-lg-12 mb-3">
-                            <div class="form-check ">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                  YES
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    NO
-                                </label>
-                              </div>
-                        </div>
-                    </div>
-                   
-            
-                      <button class="btn btn-primary disabled" id="vote-btn">Vote</button>
-                </form>
-                <div id="success" hidden>
-                    <center>
-                        <i class="fas fa-check fa-5x text-center text-success"></i>
-                        <h3 class="py-3">Successfully Voted</h3>
-                    </center>
-                </div>
-            </div>
-           
-        </div>
+  <div class="nav-panel" id="navPanel">
+    <ul>
+      <li><a href="#protocol">Protocol</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#voices">Voices</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="app.html">Sign in</a></li>
+    </ul>
+    <div class="shell" style="padding-bottom:22px">
+      <a class="btn btn-primary" href="app.html">Launch app</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================== HERO ============================== -->
+<section class="hero" id="home">
+  <div class="hero-bg" id="heroBg" aria-hidden="true">
+    <div class="hero-grid"></div>
+    <div class="hero-orb one"></div>
+    <div class="hero-orb two"></div>
+    <div class="hero-orb three"></div>
+  </div>
+
+  <div class="shell hero-inner">
+    <p class="hero-eyebrow stage" data-stage="1">
+      <b><span class="pulse-dot" aria-hidden="true"></span> v2.0</b>
+      Governance that settles on Algorand
+    </p>
+
+    <h1 class="hero-title">
+      <span class="line-mask"><span class="line-inner" data-stage="2">Turn collective intent</span></span>
+      <span class="line-mask"><span class="line-inner" data-stage="3">into <em>decisions that settle</em></span></span>
+    </h1>
+
+    <p class="hero-copy stage" data-stage="4">
+      Choice Coin is decision infrastructure for organizations that refuse to take a vote on trust.
+      Propose, ballot and finalize on-chain — in under four seconds, for a fraction of a cent.
+    </p>
+
+    <div class="hero-actions stage stage-cta" data-stage="5">
+      <a class="btn btn-primary" href="app.html">
+        Start voting free
+        <span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="btn btn-ghost btn-bracket" href="#how">
+        <span class="bracket tl" aria-hidden="true"></span><span class="bracket tr" aria-hidden="true"></span>
+        <span class="bracket bl" aria-hidden="true"></span><span class="bracket br" aria-hidden="true"></span>
+        See how it works
+      </a>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="myalgo.min.js"></script>
-    <script>
-        $("#myForm").submit(function(e){
-            e.preventDefault();
-            $("#myForm").attr("hidden", true)
-            $("#success").attr("hidden", false)
-        })
-    </script>
+    <ul class="hero-points stage" data-stage="6">
+      <li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.2 3.2L13 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Non-custodial by design</li>
+      <li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.2 3.2L13 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Free tier, no card</li>
+      <li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3.2 3.2L13 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Publicly auditable ledger</li>
+    </ul>
+  </div>
+
+  <div class="shell hero-visual" id="heroVisual">
+    <div class="stage stage-visual" data-stage="7">
+      <div class="mock" role="img" aria-label="Choice Coin dashboard showing an open proposal, 248 ballots cast, 2.4 second settlement time and 42 percent turnout.">
+        <aside class="mock-side" aria-hidden="true">
+          <span class="brand"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Choice</span>
+          <ul class="mock-nav">
+            <li class="on"><i></i> Dashboard</li>
+            <li><i></i> Proposals</li>
+            <li><i></i> Treasury</li>
+            <li><i></i> Members</li>
+            <li><i></i> Audit log</li>
+          </ul>
+          <div class="mock-side-foot"><span class="pulse-dot"></span> MainNet · synced</div>
+        </aside>
+
+        <div class="mock-main" aria-hidden="true">
+          <div class="mock-top">
+            <div>
+              <h3>Dashboard</h3>
+              <p>Governance round 41 · closes in 6h</p>
+            </div>
+            <div class="mock-avatars">
+              <span class="avatars"><span>K</span><span>M</span><span>A</span></span>
+              <span class="mock-pill">New proposal</span>
+            </div>
+          </div>
+
+          <div class="mock-search">
+            <span>Search proposals, wallets or transaction IDs</span>
+            <em>&#8984;</em>
+          </div>
+
+          <div class="mock-banner">
+            <h4>Round checklist &mdash; 3 of 4 complete</h4>
+            <ul>
+              <li><span class="tick">&#10003;</span> Quorum threshold reached (84%)</li>
+              <li><span class="tick">&#10003;</span> Ballot contract verified on-chain</li>
+              <li><span class="tick">&#10003;</span> Delegate signatures collected</li>
+            </ul>
+          </div>
+
+          <div class="mock-stats">
+            <div class="mock-stat">
+              <div class="mock-stat-top"><span>Ballots cast</span><span class="chip">+18%</span></div>
+              <b>248</b><small>vs. 210 last round</small>
+              <svg viewBox="0 0 120 30" preserveAspectRatio="none"><path d="M0 24L15 20 30 22 45 14 60 17 75 9 90 12 105 5 120 7" fill="none" stroke="#7c5cff" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div class="mock-stat">
+              <div class="mock-stat-top"><span>Settlement</span><span class="chip cool">2.4s</span></div>
+              <b>2.4s</b><small>median finality</small>
+              <svg viewBox="0 0 120 30" preserveAspectRatio="none"><path d="M0 18L15 21 30 15 45 18 60 11 75 14 90 8 105 10 120 6" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div class="mock-stat">
+              <div class="mock-stat-top"><span>Turnout</span><span class="chip">+6 pts</span></div>
+              <b>42%</b><small>of eligible holders</small>
+              <svg viewBox="0 0 120 30" preserveAspectRatio="none"><path d="M0 22L15 19 30 20 45 13 60 15 75 10 90 11 105 6 120 8" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+
+          <div class="mock-lower">
+            <div class="mock-panel">
+              <div class="mock-panel-head"><span>Participation by day</span><span>Last 14 days</span></div>
+              <div class="bars">
+                <i style="height:38%"></i><i style="height:54%"></i><i style="height:42%"></i><i style="height:66%"></i>
+                <i style="height:50%"></i><i style="height:74%"></i><i class="hi" style="height:92%"></i><i style="height:61%"></i>
+                <i style="height:70%"></i><i style="height:48%"></i><i style="height:80%"></i><i style="height:58%"></i>
+                <i style="height:88%"></i><i style="height:64%"></i>
+              </div>
+            </div>
+            <div class="mock-panel">
+              <div class="mock-panel-head"><span>Activity</span><span>Live</span></div>
+              <ul class="mock-rows">
+                <li><u></u> 12 ballots signed</li>
+                <li><u></u> Proposal #41 opened</li>
+                <li><u></u> Treasury motion passed</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MARQUEE ============================= -->
+<section class="marquee-wrap" aria-label="Organizations governing with Choice Coin">
+  <p class="marquee-title" data-reveal>Trusted by treasuries, collectives and protocol councils</p>
+  <div class="marquee" id="marquee">
+    <div class="marquee-track" id="marqueeTrack">
+      <div class="marquee-group" data-marquee-group>
+        <span class="logo"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx='12' cy='12' r='9' stroke='currentColor' stroke-width='1.6' fill='none'/><path d='M8 16l4.5-8 1.6 8M10 13.5h5' stroke='currentColor' stroke-width='1.6' stroke-linecap='round'/></svg>Algorand</span>
+        <span class="logo"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d='M12 3v18M3 12h18M6 6l12 12M18 6L6 18' stroke='currentColor' stroke-width='1.4' stroke-linecap='round'/></svg>Helios DAO</span>
+        <span class="logo"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d='M4 18L12 5l8 13z' stroke='currentColor' stroke-width='1.6' fill='none' stroke-linejoin='round'/></svg>Vertex Labs</span>
+        <span class="logo"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x='4' y='4' width='16' height='16' rx='5' stroke='currentColor' stroke-width='1.6' fill='none'/><path d='M8.5 12h7' stroke='currentColor' stroke-width='1.6' stroke-linecap='round'/></svg>Northwind</span>
+        <span class="logo"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx='9' cy='12' r='5' stroke='currentColor' stroke-width='1.5' fill='none'/><circle cx='15' cy='12' r='5' stroke='currentColor' stroke-width='1.5' fill='none'/></svg>Quorum Fund</span>
+        <span class="logo"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d='M4 10l8-5 8 5v2H4z' stroke='currentColor' stroke-width='1.5' fill='none' stroke-linejoin='round'/><path d='M7 12v6M12 12v6M17 12v6M4 19h16' stroke='currentColor' stroke-width='1.5' stroke-linecap='round'/></svg>Civic Ledger</span>
+        <span class="logo"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx='12' cy='12' r='8.5' stroke='currentColor' stroke-width='1.5' fill='none'/><path d='M12 3.5v17M4.5 8h15M4.5 16h15' stroke='currentColor' stroke-width='1.3'/></svg>Meridian</span>
+        <span class="logo"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d='M12 3l7.5 4.3v8.6L12 20.2 4.5 15.9V7.3z' stroke='currentColor' stroke-width='1.5' fill='none' stroke-linejoin='round'/></svg>Openstate</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================== FEATURE GRID ========================== -->
+<section class="section" id="protocol">
+  <div class="shell">
+    <div class="section-head">
+      <p class="label" data-label>
+        <span class="bracket tl" aria-hidden="true"></span><span class="bracket tr" aria-hidden="true"></span>
+        <span class="bracket bl" aria-hidden="true"></span><span class="bracket br" aria-hidden="true"></span>
+        <span class="label-dot" aria-hidden="true"></span> One connected protocol
+      </p>
+      <h2 class="h2" data-reveal data-split>Every step of the decision, in one place</h2>
+      <p class="section-sub" data-reveal style="--reveal-d:120ms">
+        From the first draft to the final receipt. Drafting, delegation, balloting and settlement
+        live in the same workspace, so nothing gets lost between rounds.
+      </p>
+    </div>
+
+    <div class="bento" data-stagger="100">
+      <article class="card col-4" data-reveal data-card>
+        <div class="card-kicker"><span>Proposal composer</span><span aria-hidden="true">01</span></div>
+        <div class="proposal">
+          <div class="proposal-head">
+            <span class="who" style="background:#8b7bff" aria-hidden="true">K</span>
+            <b>Kene O.</b> <span>&middot; 2m ago</span>
+          </div>
+          <p>Should the treasury allocate 40,000 CHOICE to the Q3 validator grant programme?</p>
+        </div>
+        <div class="tag-row">
+          <span class="tag">Treasury</span><span class="tag">Single choice</span><span class="tag">72h window</span>
+        </div>
+        <h3 data-split-sm>Draft in plain language</h3>
+        <p>Write the motion, pick the ballot type, set the window. The contract is generated for you.</p>
+      </article>
+
+      <article class="card col-4" data-reveal data-card>
+        <div class="card-kicker"><span>Turnout</span><span class="chip">+6 pts</span></div>
+        <span class="big-stat">42%</span>
+        <p style="margin-top:6px">of eligible holders voted in round 41</p>
+        <svg class="spark" viewBox="0 0 300 100" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="sparkfill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.28"/>
+              <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path class="f" d="M0 78L43 66 86 70 129 44 171 52 214 28 257 34 300 14V100H0Z"/>
+          <path class="l" d="M0 78L43 66 86 70 129 44 171 52 214 28 257 34 300 14"/>
+        </svg>
+        <div class="spark-axis"><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span></div>
+      </article>
+
+      <article class="card col-4" data-reveal data-card>
+        <div class="card-kicker"><span>Quorum engine</span><span aria-hidden="true">03</span></div>
+        <div class="ring-row">
+          <svg class="ring" viewBox="0 0 100 100" style="--ring-offset:45" aria-hidden="true">
+            <defs>
+              <linearGradient id="ringgrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#7c5cff"/><stop offset="100%" stop-color="#22d3ee"/>
+              </linearGradient>
+            </defs>
+            <circle class="track" cx="50" cy="50" r="45"/>
+            <circle class="val" cx="50" cy="50" r="45" transform="rotate(-90 50 50)"/>
+            <text x="50" y="55" text-anchor="middle" fill="#e9edf7" font-size="19" font-family="Space Grotesk, sans-serif">84%</text>
+          </svg>
+          <ul class="legend">
+            <li><i style="background:#34d399"></i> Quorum reached &mdash; motion binding</li>
+            <li><i style="background:#22d3ee"></i> 1,208 wallets counted</li>
+            <li><i style="background:#7c5cff"></i> 3 delegates abstained</li>
+          </ul>
+        </div>
+        <h3 style="margin-top:18px" data-split-sm>Thresholds that hold</h3>
+        <p>Quorum, supermajority and abstention rules are enforced by the contract, not by convention.</p>
+      </article>
+
+      <article class="card col-7" data-reveal data-card>
+        <div class="card-kicker"><span>Ballot designer</span><span aria-hidden="true">04</span></div>
+        <div class="ballots breathe" aria-hidden="true">
+          <span class="ballot a"></span><span class="ballot b"></span><span class="ballot c"></span>
+        </div>
+        <div class="swatches" aria-hidden="true" style="margin-bottom:16px">
+          <i style="background:#8b6bff"></i><i style="background:#f59e6b"></i><i style="background:#3fd0e8"></i><i style="background:#6ee7a8"></i>
+        </div>
+        <h3 data-split-sm>Single choice, ranked, weighted or quadratic</h3>
+        <p>Four ballot primitives, composable in one round. Weight by token balance, by membership NFT, or one wallet one vote.</p>
+      </article>
+
+      <article class="card col-5" data-reveal data-card>
+        <div class="card-kicker"><span>Delegate approvals</span><span aria-hidden="true">05</span></div>
+        <ul class="approvals">
+          <li><span class="who" style="background:#8b7bff">MO</span><span><b>Marcus Okafor</b><small>Council seat 2</small></span><span class="state yes">Signed</span></li>
+          <li><span class="who" style="background:#45d9e8">AI</span><span><b>Amara Ibe</b><small>Council seat 5</small></span><span class="state yes">Signed</span></li>
+          <li><span class="who" style="background:#6ee7a8">TR</span><span><b>Tunde R.</b><small>Treasury delegate</small></span><span class="state wait">Pending</span></li>
+        </ul>
+        <h3 style="margin-top:16px" data-split-sm>Delegation without hand-waving</h3>
+        <p>Every delegated vote carries a signature you can trace back to the wallet that cast it.</p>
+      </article>
+
+      <article class="card col-8" data-reveal data-card>
+        <div class="card-kicker"><span>Vote ledger</span><span>Round 41</span></div>
+        <table class="ledger">
+          <thead><tr><th>Transaction</th><th>Wallet</th><th>Choice</th><th>Weight</th><th>Finality</th></tr></thead>
+          <tbody>
+            <tr><td><code>NQ4F&hellip;7ZK2</code></td><td>KENE&hellip;4T9</td><td>Yes</td><td>1,240</td><td>2.1s</td></tr>
+            <tr><td><code>B8XR&hellip;1LMD</code></td><td>AMAR&hellip;9QP</td><td>Yes</td><td>860</td><td>2.4s</td></tr>
+            <tr><td><code>7TDV&hellip;PQ33</code></td><td>TUND&hellip;2WE</td><td>Abstain</td><td>410</td><td>2.2s</td></tr>
+            <tr><td><code>LM2C&hellip;44XA</code></td><td>OKEY&hellip;8BN</td><td>No</td><td>305</td><td>2.6s</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card col-4 card-cta" data-reveal data-card>
+        <div class="card-kicker"><span>Get started</span><span aria-hidden="true">07</span></div>
+        <h3 style="font-size:1.35rem">Your next decision deserves a receipt.</h3>
+        <p style="margin:10px 0 22px">Spin up a governance space in under two minutes. No card, no custody, no committee.</p>
+        <a class="btn btn-primary" href="app.html">
+          Create your space
+          <span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========================== HOW IT WORKS ========================== -->
+<section class="section" id="how">
+  <div class="shell">
+    <div class="section-head">
+      <p class="label" data-label>
+        <span class="bracket tl" aria-hidden="true"></span><span class="bracket tr" aria-hidden="true"></span>
+        <span class="bracket bl" aria-hidden="true"></span><span class="bracket br" aria-hidden="true"></span>
+        <span class="label-dot" aria-hidden="true"></span> Three steps to settled
+      </p>
+      <h2 class="h2" data-reveal data-split>From proposal to <em>proof</em></h2>
+      <p class="section-sub" data-reveal style="--reveal-d:120ms">
+        No migration, no chain to pick, no signing ceremony. Connect a wallet and the protocol does the rest.
+      </p>
+    </div>
+
+    <div class="steps" data-stagger="120">
+      <article class="step" data-reveal data-card>
+        <span class="step-no" aria-hidden="true">01</span>
+        <h3 data-split-sm>Connect your wallet</h3>
+        <p>Choice Coin reads eligibility straight from the chain. Keys never leave your device, and nothing is ever custodied.</p>
+        <div class="step-art" data-art aria-hidden="true">
+          <div class="step-art-row on"><i></i> MyAlgo Wallet &mdash; connected</div>
+          <div class="step-art-row"><i></i> Pera Wallet</div>
+          <div class="step-art-row"><i></i> WalletConnect</div>
+        </div>
+      </article>
+
+      <article class="step" data-reveal data-card>
+        <span class="step-no" aria-hidden="true">02</span>
+        <h3 data-split-sm>Cast your choice</h3>
+        <p>Read the motion, pick an option, sign once. Weighted and ranked ballots are calculated client-side before submission.</p>
+        <div class="step-art" data-art aria-hidden="true">
+          <div class="step-art-row on"><i></i> Yes &mdash; approve the allocation</div>
+          <div class="step-art-row"><i></i> No &mdash; reject</div>
+          <div class="meter" style="--meter:68%"><i></i></div>
+          <div class="step-caption"><span>Live tally</span><span>68% yes</span></div>
+        </div>
+      </article>
+
+      <article class="step" data-reveal data-card>
+        <span class="step-no" aria-hidden="true">03</span>
+        <h3 data-split-sm>Settle on-chain</h3>
+        <p>The result is written to Algorand and finalized in seconds. Anyone can verify the count — including the people who lost.</p>
+        <div class="step-art" data-art aria-hidden="true">
+          <div class="step-art-row on"><i></i> Round 41 finalized &mdash; 2.4s</div>
+          <div class="step-art-row"><i></i> Receipt <code style="color:#22d3ee">NQ4F&hellip;7ZK2</code></div>
+          <div class="meter" style="--meter:100%"><i></i></div>
+          <div class="step-caption"><span>Confirmations</span><span>Irreversible</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== TESTIMONIALS ========================= -->
+<section class="section" id="voices">
+  <div class="shell">
+    <div class="section-head">
+      <p class="label" data-label>
+        <span class="bracket tl" aria-hidden="true"></span><span class="bracket tr" aria-hidden="true"></span>
+        <span class="bracket bl" aria-hidden="true"></span><span class="bracket br" aria-hidden="true"></span>
+        <span class="label-dot" aria-hidden="true"></span> Global feedback
+      </p>
+      <h2 class="h2" data-reveal data-split>What Web3 councils are shipping</h2>
+      <p class="section-sub" data-reveal style="--reveal-d:120ms">
+        Treasuries, cooperatives and protocol councils moved their decisions on-chain. Here is what changed.
+      </p>
+    </div>
+
+    <div class="quotes" data-reveal>
+      <div class="quote-stage">
+        <div class="quote-body" id="quoteBody" aria-live="polite">
+          <p class="quote-icon" aria-hidden="true">&ldquo;</p>
+          <p class="quote-text" id="quoteText">Migrating our treasury votes to Choice Coin cut a three-week approval cycle down to an afternoon. The council stopped arguing about the count and started arguing about the decision.</p>
+          <div class="quote-person">
+            <span class="who" id="quoteAvatar" aria-hidden="true" style="background:#8b7bff">KO</span>
+            <span><b id="quoteName">Kene Obi</b><span id="quoteRole">Operations Lead, Helios DAO</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quote-controls">
+        <button class="qbtn prev" id="quotePrev" type="button" aria-label="Previous testimonial">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 3.5L2.5 8 7 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Previous
+        </button>
+        <button class="qbtn next" id="quoteNext" type="button" aria-label="Next testimonial">
+          Next
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 3.5L13.5 8 9 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="quote-dots" id="quoteDots" aria-label="Choose a testimonial"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================ FAQ ============================= -->
+<section class="section" id="faq">
+  <div class="shell">
+    <div class="section-head">
+      <p class="label" data-label>
+        <span class="bracket tl" aria-hidden="true"></span><span class="bracket tr" aria-hidden="true"></span>
+        <span class="bracket bl" aria-hidden="true"></span><span class="bracket br" aria-hidden="true"></span>
+        <span class="label-dot" aria-hidden="true"></span> System requirements
+      </p>
+      <h2 class="h2" data-reveal data-split>Frequently asked questions</h2>
+      <p class="section-sub" data-reveal style="--reveal-d:120ms">
+        Consensus, custody, fees and node requirements — answered without the marketing gloss.
+      </p>
+    </div>
+
+    <div class="faq" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-1" id="faq-q-1">
+          <span>What consensus mechanism does Choice Coin rely on?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
+          <div class="faq-a-inner">
+            Choice Coin is an ASA on Algorand, which uses Pure Proof of Stake. Blocks are final the moment they
+            are written — there are no forks to wait out and no reorg risk, so a settled vote stays settled.
+            Median finality across recent governance rounds is roughly 2.4 seconds.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-2" id="faq-q-2">
+          <span>Is the voting contract audited by third parties?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
+          <div class="faq-a-inner">
+            The ballot and tally contracts are open source and reviewed before each protocol release. Every
+            deployed contract address is published with its source, so you can diff what is running against
+            what was reviewed rather than taking our word for it.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-3" id="faq-q-3">
+          <span>How much does it cost to cast a vote?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
+          <div class="faq-a-inner">
+            A vote is a single Algorand transaction, so the network fee is a fraction of a cent — currently
+            0.001 ALGO. Choice Coin adds nothing on top for voters on any plan, including the free tier.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-4" id="faq-q-4">
+          <span>Which wallets can I connect?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
+          <div class="faq-a-inner">
+            MyAlgo Wallet is supported today, with Pera and WalletConnect sessions rolling out. Connections are
+            non-custodial: the app requests a signature per ballot and never holds keys, seed phrases or funds.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-a-5" id="faq-q-5">
+          <span>What do I need to run my own node?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a" id="faq-a-5" role="region" aria-labelledby="faq-q-5">
+          <div class="faq-a-inner">
+            Nothing, unless you want to. Voting works entirely through public infrastructure. Organizations that
+            need their own indexer can point Choice Coin at a private node on the Custom Node plan — 4 vCPU,
+            8&nbsp;GB RAM and an SSD are comfortable for an archival setup.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== PRICING =========================== -->
+<section class="section" id="pricing">
+  <div class="shell">
+    <div class="section-head">
+      <p class="label" data-label>
+        <span class="bracket tl" aria-hidden="true"></span><span class="bracket tr" aria-hidden="true"></span>
+        <span class="bracket bl" aria-hidden="true"></span><span class="bracket br" aria-hidden="true"></span>
+        <span class="label-dot" aria-hidden="true"></span> Flexible plans
+      </p>
+      <h2 class="h2" data-reveal data-split>Scale your governance without friction</h2>
+      <p class="section-sub" data-reveal style="--reveal-d:120ms">
+        Voting is always free. You only pay when your organization needs scale, private infrastructure or support.
+      </p>
+    </div>
+
+    <div class="bill-row" data-reveal>
+      <div class="segmented" role="radiogroup" aria-label="Billing period" id="billing">
+        <span class="segmented-pill" id="billPill" aria-hidden="true"></span>
+        <button class="seg-btn" type="button" role="radio" aria-checked="true" data-period="monthly">Monthly</button>
+        <button class="seg-btn" type="button" role="radio" aria-checked="false" data-period="annual">Annual</button>
+      </div>
+      <span class="save-badge"><span class="pulse-dot" aria-hidden="true"></span> Save 20% on annual</span>
+    </div>
+
+    <div class="plans" data-stagger="100">
+      <article class="plan" data-reveal data-card>
+        <p class="plan-kicker">Community</p>
+        <h3>Free Tier</h3>
+        <div class="plan-price">
+          <span class="price-value" data-monthly="$0" data-annual="$0">$0</span>
+          <span class="price-period" data-period-label>/ month</span>
+        </div>
+        <p class="plan-note">Everything an unincorporated collective needs to stop voting in a group chat.</p>
+        <ul class="plan-feats">
+          <li><span class="tick">&#10003;</span> Up to 100 voting members</li>
+          <li><span class="tick">&#10003;</span> Single choice &amp; yes/no ballots</li>
+          <li><span class="tick">&#10003;</span> Public audit log</li>
+          <li><span class="tick">&#10003;</span> MyAlgo wallet connect</li>
+        </ul>
+        <a class="btn btn-ghost btn-bracket" href="app.html">
+          <span class="bracket tl" aria-hidden="true"></span><span class="bracket tr" aria-hidden="true"></span>
+          <span class="bracket bl" aria-hidden="true"></span><span class="bracket br" aria-hidden="true"></span>
+          Get started
+        </a>
+      </article>
+
+      <article class="plan featured" data-reveal data-card>
+        <span class="plan-badge">Recommended</span>
+        <p class="plan-kicker">Production</p>
+        <h3>Pro Protocol</h3>
+        <div class="plan-price">
+          <span class="price-value" data-monthly="$49" data-annual="$39">$49</span>
+          <span class="price-period" data-period-label>/ month</span>
+        </div>
+        <p class="plan-note">For treasuries and councils running binding rounds on a schedule.</p>
+        <ul class="plan-feats">
+          <li><span class="tick">&#10003;</span> Unlimited voting members</li>
+          <li><span class="tick">&#10003;</span> Ranked, weighted &amp; quadratic ballots</li>
+          <li><span class="tick">&#10003;</span> Delegation &amp; quorum rules</li>
+          <li><span class="tick">&#10003;</span> Webhooks and REST API</li>
+          <li><span class="tick">&#10003;</span> Exportable round receipts</li>
+        </ul>
+        <a class="btn btn-primary" href="app.html">
+          Activate plan
+          <span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6h8M6.5 2.5L10 6l-3.5 3.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </article>
+
+      <article class="plan" data-reveal data-card>
+        <p class="plan-kicker">Enterprise</p>
+        <h3>Custom Node</h3>
+        <div class="plan-price">
+          <span class="price-value" data-monthly="$199" data-annual="$159">$199</span>
+          <span class="price-period" data-period-label>/ month</span>
+        </div>
+        <p class="plan-note">Private infrastructure and a governance contract shaped around your charter.</p>
+        <ul class="plan-feats">
+          <li><span class="tick">&#10003;</span> Dedicated indexer &amp; node</li>
+          <li><span class="tick">&#10003;</span> Custom contract review</li>
+          <li><span class="tick">&#10003;</span> SSO and role-based access</li>
+          <li><span class="tick">&#10003;</span> Priority support, 4h response</li>
+        </ul>
+        <a class="btn btn-ghost btn-bracket" href="app.html">
+          <span class="bracket tl" aria-hidden="true"></span><span class="bracket tr" aria-hidden="true"></span>
+          <span class="bracket bl" aria-hidden="true"></span><span class="bracket br" aria-hidden="true"></span>
+          Talk to us
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="shell footer-inner">
+    <a class="brand" href="#home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      Choice Coin
+    </a>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="#protocol">Protocol</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="app.html">Launch app</a>
+      <a href="https://github.com/Wendzzz/Choice-Coin-App" rel="noopener">GitHub</a>
+    </nav>
+    <p>&copy; 2026 Choice Coin. Built on Algorand.</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>
